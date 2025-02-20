@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+        <style>
+            form{
+                border: 2px solid black;
+                padding: 20px;
+                width: 50%;
+                background-color: aquamarine;
+            }
+div.output
+{
+    border: 2px solid black;
+                padding: 20px;
+                width: 20%;
+}
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <form id="regform"><div>
+                <input type="email" id="email" placeholder="Enter email" required></br></br>
+                <input type="password" id="password" placeholder="Enter password" required></br></br>
+                <input type="text" id="phone" placeholder="Enter phone number" required></br></br>
+                <button type="submit">Submit</button>
+            </div></form>
+            <div><h1>Entered details:</h1>
+            <div id="output" class="output">
+            </div></div>
+        </div>
+
+        <script>
+            document.getElementById('regform').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const phone = document.getElementById('phone').value;
+                const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+                if (!emailPattern.test(email)) {
+                    alert('Invalid email format');                
+                }
+
+                if (password.length < 6) {
+                    alert('Password must be at least 6 characters.'); 
+                    return;
+                }
+
+                const phonePattern = /^\d{10,15}$/;
+                if (!phonePattern.test(phone)) {
+                    alert('Invalid phone number. It should contain 10 to 15 digits.');
+                    return;
+                }
+
+                const output = document.getElementById('output');
+                output.innerHTML = `
+                    <div><strong>Email:</strong> ${email}</div> <!-- Display the email -->
+                    <div><strong>Password:</strong> ${password}</div> <!-- Display the password -->
+                    <div><strong>Phone Number:</strong> ${phone}</div> <!-- Display the phone number -->
+                `;
+            });
+        </script>
+    </body>
+</html>
